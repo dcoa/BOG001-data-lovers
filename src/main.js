@@ -3,11 +3,11 @@
 //import data from './data/pokemon/pokemon.js';
 //import data from './data/rickandmorty/rickandmorty.js';
 
-
-fetch('data/rickandmorty.json')
-.then(res => res.json())
+fetch('data/rickandmorty/rickandmorty.json')
+.then(response => response.json())
 .then(data => {
-console.log(res);});
+    console.log(data);
+});
 
 var personajesObj;
 
