@@ -3,10 +3,16 @@
 //import data from './data/pokemon/pokemon.js';
 //import data from './data/rickandmorty/rickandmorty.js';
 
+
+fetch('data/rickandmorty.json')
+.then(res => res.json())
+.then(data => {
+console.log(res);});
+
 var personajesObj;
 
 const content = document.getElementById("content")
-const get = (url) => {
+const get = (url = "https://rickandmortyapi.com/api/character/") => {
 
    fetch(url)
       .then(res => res.json())
@@ -23,9 +29,6 @@ const get = (url) => {
 
 
 }
-const buttoncharacters = document.getElementById('button');
-buttoncharacters.addEventListener('click', get);
-
 const personajes = {
    pintar: (personajesItem) => {
 
