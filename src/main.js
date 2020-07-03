@@ -2,67 +2,31 @@
 // import data from './data/lol/lol.js';
 //import data from './data/pokemon/pokemon.js';
 //import data from './data/rickandmorty/rickandmorty.js';
-
+/*card
+<h1>ACCESS PORTAL CARD</h1> <span>&times;</span>
+<h2>${data.results[i].name}</h2>
+<p>Gender: ${data.results[i].gender}</p>
+<p>Status: ${data.results[i].status}</p>
+<p>Specie: ${data.results[i].species}</p>
+<p>Origin Planet: ${data.results[i].origin.name}</p>
+*/
 fetch('data/rickandmorty/rickandmorty.json')
 .then(response => response.json())
 .then(data => {
-    console.log(data.results);
+  let d = " ";
+
+  data.results.forEach((item, i) => {
+    d += `<div class="card">
+          <img src="${data.results[i].image}" alt="Character Image">
+          <h2>${data.results[i].name}</h2>
+          </div>`
+  });
+    container.innerHTML = d;
+    for (var i = 0; i < cardOpen.length; i++) {
+      cardOpen[i].addEventListener('click', ()=> console.log('rayos'))
+    }
 });
 
-var personajesObj;
-
-const content = document.getElementById("content")
-const get = (url = "https://rickandmortyapi.com/api/character/") => {
-
-   fetch(url)
-      .then(res => res.json())
-      .then(res => {
-         console.log(res);
-
-         personajesObj = res.info;
-         res.results.forEach(element => {
-            personajes.pintar(element);
-         });
-
-
-      });
-
-
-}
-const personajes = {
-   pintar: (personajesItem) => {
-
-      let divElement = document.createElement("div");
-
-      let imgElement = document.createElement("img");
-      imgElement.src = personajesItem.image;
-
-      let nameElement = document.createElement("h3");
-      nameElement.innerHTML = personajesItem.name;
-
-      let statusElement = document.createElement("p");
-      statusElement.innerHTML = personajesItem.status;
-
-      let speciesElement = document.createElement("p");
-      speciesElement.innerHTML = personajesItem.species;
-
-      divElement.appendChild(imgElement);
-      divElement.appendChild(nameElement);
-      divElement.appendChild(statusElement);
-      divElement.appendChild(speciesElement);
-
-
-
-      let optionsHtml = document.getElementById("container");
-      optionsHtml.appendChild(divElement);
-
-
-
-   },
-   more: () => {
-      if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
-         document.getElementById("seeMore").disabled = true;
-      }
-      get(personajesObj.next);
-   }
-};
+const container = document.getElementById('container');
+const cardOpen = document.getElementsByClassName('card');
+console.log(cardOpen);
