@@ -1,5 +1,5 @@
 /*import { example } from './data.js';*/
- 
+
 //import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 
 var personajesObj = {};
@@ -13,6 +13,7 @@ function more(){
         document.getElementById("seeMore").disabled = true;
      }
       cargarPersonajes(personajesObj.next);
+
  }
 
 function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/"){
@@ -23,6 +24,7 @@ function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/"){
            res.results.forEach(element => {
               personajes.pintar(element);
            });
+
         });
 }
 
@@ -37,6 +39,7 @@ const personajes = {
 
 
        let nameElement = document.createElement("h3");
+       nameElement.name = personajesItem.name
        nameElement.innerHTML = personajesItem.name;
 
        let speciesElement = document.createElement("p");
@@ -45,15 +48,15 @@ const personajes = {
        let statusElement = document.createElement("p");
        statusElement.innerHTML = personajesItem.status;
 
-       let NameOrigin = document.createElement("p")
-       NameOrigin.innerHTML = personajesItem.origin.name;
+       let nameOrigin = document.createElement("p")
+       nameOrigin.innerHTML = personajesItem.origin.name;
 
 
        divElement.appendChild(imgElement);
        divElement.appendChild(nameElement);
        divElement.appendChild(statusElement);
        divElement.appendChild(speciesElement);
-       divElement.appendChild(NameOrigin);
+       divElement.appendChild(nameOrigin);
 
        let optionsHtml = document.getElementById("container");
        optionsHtml.appendChild(divElement);
