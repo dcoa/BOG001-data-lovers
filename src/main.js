@@ -33,6 +33,7 @@ const personajes = {
  
        let imgElement = document.createElement("img") 
        imgElement.src = personajesItem.image;
+       imgElement.addEventListener("click", loadModal)
         
        
        let nameElement = document.createElement("h3");
@@ -58,14 +59,17 @@ const personajes = {
        optionsHtml.appendChild(divElement);
      },
      
-   /* more: () => {
     
-        if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
-          document.getElementById("seeMore").disabled = true;
-       }
-       get.cargar(personajesObj.next);
-    }  */ 
  };
+
+ function loadModal(){
+   var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+ }
+ function closeModal(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+ }
 
 
 
@@ -75,4 +79,9 @@ btn.addEventListener("click",cargar)
 
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
+
+
+const evento = document.getElementById("closeModal")
+evento.addEventListener("click",closeModal)
+
 
