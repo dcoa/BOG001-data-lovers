@@ -1,87 +1,105 @@
 /*import { example } from './data.js';*/
- 
+
 //import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 
 var personajesObj = {};
-
-function cargar(){
-    cargarPersonajes()
+var everyone = [];
+function cargar() {
+   cargarPersonajes()
 }
 
-function more(){
-    if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
-        document.getElementById("seeMore").disabled = true;
-     }
-      cargarPersonajes(personajesObj.next);
- }
+function more() {
+   if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
+      document.getElementById("seeMore").disabled = true;
+   }
 
-function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/"){
-    fetch(url)
-        .then(res => res.json())
-        .then(res => {
-           personajesObj = res.info;
-           res.results.forEach(element => {
-              personajes.pintar(element);
-           });
-        });
+   cargarPersonajes(personajesObj.next);
+}
+
+function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
+   fetch(url)
+      .then(res => res.json())
+      .then(res => {
+         personajesObj = res.info;
+         everyone = everyone.concat(res.results)
+         res.results.forEach(element => {
+            personajes.pintar(element);
+         });
+      });
 }
 
 const personajes = {
-    pintar: (personajesItem) => {
- 
-       let divElement = document.createElement("div");
- 
-       let imgElement = document.createElement("img") 
-       imgElement.src = personajesItem.image;
-       imgElement.addEventListener("click", loadModal)
-        
-       
-       let nameElement = document.createElement("h3");
-       nameElement.innerHTML = personajesItem.name;
- 
-       let speciesElement = document.createElement("p");
-       speciesElement.innerHTML = personajesItem.species;
- 
-       let statusElement = document.createElement("p");
-       statusElement.innerHTML = personajesItem.status;
- 
-       let NameOrigin = document.createElement("p")
-       NameOrigin.innerHTML = personajesItem.origin.name;      
-    
-  
-       divElement.appendChild(imgElement);
-       divElement.appendChild(nameElement);
-       divElement.appendChild(statusElement);
-       divElement.appendChild(speciesElement);
-       divElement.appendChild(NameOrigin);
-    
-       let optionsHtml = document.getElementById("container");
-       optionsHtml.appendChild(divElement);
-     },
-     
-    
- };
+   pintar: (personajesItem) => {
 
- function loadModal(){
+      let divElement = document.createElement("div");
+
+      let imgElement = document.createElement("img")
+      imgElement.src = personajesItem.image;
+      imgElement.id = personajesItem.id;
+      imgElement.addEventListener("click", loadModal)
+
+
+
+      divElement.appendChild(imgElement);
+
+      let optionsHtml = document.getElementById("container");
+      optionsHtml.appendChild(divElement);
+   },
+
+
+};
+
+function loadModal(event) {
+   debugger
+   let id = event.target.id;
+   let character = everyone.find(ch => ch.id == Number(id));
+   
    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
- }
- function closeModal(){
-    var modal = document.getElementById("myModal");
-    modal.style.display = "none";
- }
+   modal.style.display = "block";
+   document.getElementById("header").innerHTML = "PORTAL ACCESS CARD";
+   let bodyModal = document.getElementById("bodyModal");
+
+   bodyModal.innerHTML = "";
+
+   let imgElement = document.createElement("img")
+   imgElement.src = character.image;
+
+   let nameElement = document.createElement("h3");
+   nameElement.innerHTML = character.name;
+
+   let speciesElement = document.createElement("p");
+   speciesElement.innerHTML = character.species;
+
+   let statusElement = document.createElement("p");
+   statusElement.innerHTML = character.status;
+
+   let NameOrigin = document.createElement("p")
+   NameOrigin.innerHTML = character.origin.name;
+   
+   bodyModal.appendChild(imgElement);
+   bodyModal.appendChild(nameElement);
+   bodyModal.appendChild(speciesElement);
+   bodyModal.appendChild(statusElement);
+   bodyModal.appendChild(NameOrigin);
+
+
+}
+function closeModal() {
+   var modal = document.getElementById("myModal");
+   modal.style.display = "none";
+}
 
 
 
-const content = document.getElementById("content")
+const content = document.getElementById("content");
 const btn = document.getElementById("seeCharacters");
-btn.addEventListener("click",cargar)
+btn.addEventListener("click", cargar)
 
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
 
 
-const evento = document.getElementById("closeModal")
-evento.addEventListener("click",closeModal)
+const evento = document.getElementById("closeModal");
+evento.addEventListener("click", closeModal);
 
 
