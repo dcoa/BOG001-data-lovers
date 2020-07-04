@@ -3,6 +3,7 @@
 //import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 
 var personajesObj = {};
+var datoid;
 
 function cargar(){
     cargarPersonajes()
@@ -20,11 +21,16 @@ function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/"){
     fetch(url)
         .then(res => res.json())
         .then(res => {
+            // console.log(res.results[0].id)
            personajesObj = res.info;
            res.results.forEach(element => {
               personajes.pintar(element);
            });
-
+           res.results.find(element => {
+             if(res.results.id === datoid){
+               console.log("funciono");
+             }
+           })
         });
 }
 
@@ -35,11 +41,11 @@ const personajes = {
 
        let imgElement = document.createElement("img")
        imgElement.src = personajesItem.image;
+       imgElement.id = personajesItem.id;
        imgElement.addEventListener("click", loadModal)
 
 
        let nameElement = document.createElement("h3");
-       nameElement.name = personajesItem.name
        nameElement.innerHTML = personajesItem.name;
 
        let speciesElement = document.createElement("p");
@@ -65,11 +71,15 @@ const personajes = {
 
  };
 
- function loadModal(){
+function loadModal(event){
+   datoid = event.target.id;
+    console.log(event.target.id);
    var modal = document.getElementById("myModal");
     modal.style.display = "block";
+  return datoid;
  }
- function closeModal(){
+
+function closeModal(){
     var modal = document.getElementById("myModal");
     modal.style.display = "none";
  }
@@ -77,7 +87,7 @@ const personajes = {
 
 
 const content = document.getElementById("content")
-const btn = document.getElementById("seeCharacters");
+  const btn = document.getElementById("seeCharacters");
 btn.addEventListener("click",cargar)
 
 const btnSeeMore = document.getElementById("seeMore");
