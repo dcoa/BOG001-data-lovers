@@ -1,6 +1,6 @@
 /*import { example } from './data.js';*/
 
-//import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
+//import cargarPersonajes from './data.js';  
 
 var personajesObj = {};
 var everyone = [];
@@ -38,8 +38,6 @@ const personajes = {
       imgElement.id = personajesItem.id;
       imgElement.addEventListener("click", loadModal)
 
-
-
       divElement.appendChild(imgElement);
 
       let optionsHtml = document.getElementById("container");
@@ -50,10 +48,9 @@ const personajes = {
 };
 
 function loadModal(event) {
-   debugger
+   
    let id = event.target.id;
    let character = everyone.find(ch => ch.id == Number(id));
-   
    var modal = document.getElementById("myModal");
    modal.style.display = "block";
    document.getElementById("header").innerHTML = "PORTAL ACCESS CARD";
