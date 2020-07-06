@@ -22,5 +22,8 @@
     "jest": "^24.9.0",
     "opener": "^1.5.1",
     "serve": "^11.0.0"
+  },
+  "devDependencies": {
+  "node-fetch": "^2.6.0" 
   }
 }
