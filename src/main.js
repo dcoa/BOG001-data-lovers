@@ -61,7 +61,7 @@ function loadModal(event) {
    let character = everyone.find(ch => ch.id == Number(id));
 
    var modal = document.getElementById("myModal");
-   modal.style.display = "block";
+   modal.style.display = "flex";
    let img = document.getElementById("imgElement");
    let contentElement = document.getElementById("contentElement");
 

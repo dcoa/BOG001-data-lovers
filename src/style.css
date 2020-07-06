@@ -137,6 +137,7 @@ div, .select{
     background-color: rgba(0, 0, 0, 0.7);
     padding: 5px;
   }
+
 /* Modal Window*/
 .modal {
   display: none; /* Hidden by default */
@@ -144,7 +145,6 @@ div, .select{
   z-index: 1;
   left: 0;
   top: 0;
-  align-items: center;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
@@ -152,9 +152,7 @@ div, .select{
 }
 
   .modal-content {
-    display: block;
     margin: auto;
-    position: relative;
     max-width: 300px;
     max-height: 500px;
     color: #000000;
@@ -172,13 +170,24 @@ div, .select{
   font-weight: bold;
 }
 
+.close:hover, .close:focus {
+  color: #176E06;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .modal-header {
   margin-bottom: 0;
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 10fr 1fr;
+  grid-gap: 0;
   background-color: #2FE40B;
   border: solid #176E06;
   border-width: 2px 0px;
+}
+
+.modal-header h2{
+  font-size: 20px;
 }
 
 .modal-body, #contentElement {
@@ -187,9 +196,7 @@ div, .select{
   padding: 10px;
 }
 
-
 #imgElement img{
-  display: block;
   margin:auto;
   width: 50%;
   border-radius: 3px;
@@ -205,6 +212,7 @@ div, .select{
   font-size: 30px;
 }
 
+
 @media screen and (min-width: 740px){
   section{
     padding: 10px 100px;
@@ -212,12 +220,23 @@ div, .select{
 
   #container{
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 30px;
+    grid-gap: 20px;
 
 }
-  .close:hover, .close:focus {
-    color: #176E06;
-    text-decoration: none;
-    cursor: pointer;
+
+  .modal-content{
+    max-width: 500px;
+    max-height: 300px;
   }
+
+  .modal-body {
+    display: grid;
+    padding: 10px;
+    max-width: 500px;
+    max-height: 300px;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  #imgElement img{
+    width: 100%;
 }

@@ -8,6 +8,7 @@
   font-size: 16px;
   color: #FAF7F7;
   font-family: 'Pangolin', cursive;
+
 }
 
 body {
@@ -34,9 +35,9 @@ header, footer{
 h1{
   font-family: "Get Schwifty";
   font-size: 60px;
-  color: #62C6C3;
-  text-shadow: 1px 1px 3px #B2F15E, 1px -1px 3px #B2F15E, -1px 1px 3px #B2F15E, 1px 1px 3px , 0 1px 3px #B2F15E, -1px 0 3px #B2F15E, -1px 0 3px #B2F15E, 0 -1px 3px #B2F15E;
-  -webkit-text-stroke: 0.03px #284F60;
+  color: #3FE6FB;
+  text-shadow: 1px 1px 5px #2DDB0B, 1px -1px 5px #2DDB0B, -1px 1px 5px #2DDB0B, 1px 1px 5px , 0 1px 5px #2DDB0B, -1px 0 5px #2DDB0B, -1px 0 5px #2DDB0B, 0 -1px 5px #2DDB0B;
+  -webkit-text-stroke: 0.03px #05434B;
   }
 
 main{
@@ -60,7 +61,9 @@ img{
     margin: 40px;
     text-align: center;
   }
-
+  h1{
+    font-size: 80px;
+  }
   img{
     display: block;
     width: 50%;
