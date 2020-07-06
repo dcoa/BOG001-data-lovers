@@ -1,12 +1,16 @@
 /*import { example } from './data.js';*/
 
 //import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
+const btnSeeMore = document.getElementById("seeMore");
+btnSeeMore.addEventListener("click", more)
+
+const evento = document.getElementById("closeModal");
+evento.addEventListener("click", closeModal);
 
 var personajesObj = {};
 var everyone = [];
-function cargar() {
-   cargarPersonajes()
-}
+
+cargarPersonajes();
 
 function more() {
    if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
@@ -36,30 +40,33 @@ const personajes = {
       let imgElement = document.createElement("img")
       imgElement.src = personajesItem.image;
       imgElement.id = personajesItem.id;
-      imgElement.addEventListener("click", loadModal)
+      imgElement.className = "select";
+      imgElement.addEventListener("click", loadModal);
 
-
+      let nameElement = document.createElement("h3");
+      nameElement.innerHTML = personajesItem.name;
+      nameElement.className = "selectname";
 
       divElement.appendChild(imgElement);
+      divElement.appendChild(nameElement);
 
       let optionsHtml = document.getElementById("container");
       optionsHtml.appendChild(divElement);
    },
-
-
 };
 
 function loadModal(event) {
-   debugger
+
    let id = event.target.id;
    let character = everyone.find(ch => ch.id == Number(id));
 
    var modal = document.getElementById("myModal");
    modal.style.display = "block";
-   document.getElementById("header").innerHTML = "PORTAL ACCESS CARD";
-   let bodyModal = document.getElementById("bodyModal");
+   let img = document.getElementById("imgElement");
+   let contentElement = document.getElementById("contentElement");
 
-   bodyModal.innerHTML = "";
+   img.innerHTML = "";
+   contentElement.innerHTML = "";
 
    let imgElement = document.createElement("img")
    imgElement.src = character.image;
@@ -67,37 +74,38 @@ function loadModal(event) {
    let nameElement = document.createElement("h3");
    nameElement.innerHTML = character.name;
 
-   let speciesElement = document.createElement("p");
-   speciesElement.innerHTML = character.species;
+   let statusgender = document.createElement("div");
 
    let statusElement = document.createElement("p");
-   statusElement.innerHTML = character.status;
+   statusElement.innerHTML = "Status: " + character.status;
+   if (character.status === "Alive") {
+     statusElement.style.color = "#20856B";
+   } else if (character.status === "Dead") {
+     statusElement.style.color = "#6E1F06";
+   } else {
+     statusElement.style.color = "#000000"
+   }
 
-   let NameOrigin = document.createElement("p")
-   NameOrigin.innerHTML = character.origin.name;
+   let genderElement = document.createElement("p");
+   genderElement.innerHTML = "Genere: " + character.gender;
 
-   bodyModal.appendChild(imgElement);
-   bodyModal.appendChild(nameElement);
-   bodyModal.appendChild(speciesElement);
-   bodyModal.appendChild(statusElement);
-   bodyModal.appendChild(NameOrigin);
 
+   let speciesElement = document.createElement("p");
+   speciesElement.innerHTML = "Specie: " + character.species;
+   let nameOrigin = document.createElement("p");
+   nameOrigin.innerHTML = "Origin Planet: " + character.origin.name;
+
+   statusgender.appendChild(statusElement);
+   statusgender.appendChild(genderElement);
+   img.appendChild(imgElement);
+   contentElement.appendChild(nameElement);
+   contentElement.appendChild(statusgender);
+   contentElement.appendChild(speciesElement);
+   contentElement.appendChild(nameOrigin);
 
 }
+
 function closeModal() {
    var modal = document.getElementById("myModal");
    modal.style.display = "none";
 }
-
-
-
-const content = document.getElementById("content");
-const btn = document.getElementById("seeCharacters");
-btn.addEventListener("click", cargar)
-
-const btnSeeMore = document.getElementById("seeMore");
-btnSeeMore.addEventListener("click", more)
-
-
-const evento = document.getElementById("closeModal");
-evento.addEventListener("click", closeModal);
