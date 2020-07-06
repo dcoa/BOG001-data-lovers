@@ -22,5 +22,10 @@
     "jest": "^24.9.0",
     "opener": "^1.5.1",
     "serve": "^11.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "node-fetch": "^2.6.0"
   }
 }
