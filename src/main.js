@@ -1,4 +1,4 @@
-/*import { example } from './data.js';*/
+/*import { example } from './data.js';*/ 
 
 //import cargarPersonajes from './data.js';  
 
@@ -48,7 +48,6 @@ const personajes = {
 };
 
 function loadModal(event) {
-   
    let id = event.target.id;
    let character = everyone.find(ch => ch.id == Number(id));
    var modal = document.getElementById("myModal");
@@ -72,7 +71,7 @@ function loadModal(event) {
 
    let NameOrigin = document.createElement("p")
    NameOrigin.innerHTML = character.origin.name;
-   
+
    bodyModal.appendChild(imgElement);
    bodyModal.appendChild(nameElement);
    bodyModal.appendChild(speciesElement);

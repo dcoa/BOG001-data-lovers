@@ -11,7 +11,7 @@ describe('API REST', () => {
     expect(typeof res.info).toBe('object');
     expect(typeof res.results).toBe('object');
 
-    for (let character of res.results) {
+    for (let character of res.results) { 
       expect(typeof character.image).toBe('string');
       expect(typeof character.name).toBe('string');
       expect(typeof character.species).toBe('string');
