@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&family=Rubik:wght@700&display=swap');
-@import url('font/get_schwifty.ttf');
+@font-face {
+  font-family: "Get Schwifty";
+  src: url('font/get_schwifty.ttf') format('truetype');
+}
 
 *{
   margin:0px;
