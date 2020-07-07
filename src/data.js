@@ -6,7 +6,7 @@ export const get = async (url) => {
    return personajes;
 };
 
-/*export const anotherExample = () => {
+/*export const  = () => {
   return 'OMG';
 };*/
 
