@@ -1,6 +1,5 @@
-/*import { example } from './data.js';*/
-
-//import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
+import { filterEpisode } from './data.js';
+//imort  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
 
@@ -25,7 +24,8 @@ function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
       .then(res => res.json())
       .then(res => {
          personajesObj = res.info;
-         everyone = everyone.concat(res.results)
+
+         everyone = everyone.concat(res.results);
          res.results.forEach(element => {
             personajes.pintar(element);
          });
@@ -33,18 +33,18 @@ function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
 }
 
 const personajes = {
-   pintar: (personajesItem) => {
+   pintar: (everyone) => {
 
       let divElement = document.createElement("div");
 
       let imgElement = document.createElement("img")
-      imgElement.src = personajesItem.image;
-      imgElement.id = personajesItem.id;
+      imgElement.src = everyone.image;
+      imgElement.id = everyone.id;
       imgElement.className = "select";
       imgElement.addEventListener("click", loadModal);
 
       let nameElement = document.createElement("h3");
-      nameElement.innerHTML = personajesItem.name;
+      nameElement.innerHTML = everyone.name;
       nameElement.className = "selectname";
 
       divElement.appendChild(imgElement);
@@ -54,6 +54,7 @@ const personajes = {
       optionsHtml.appendChild(divElement);
    },
 };
+console.log(filterEpisode(everyone));
 
 function loadModal(event) {
 
