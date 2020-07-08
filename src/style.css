@@ -213,8 +213,8 @@ div, .select{
 }
 
 
-@media screen and (min-width: 740px){ 
-  section{ 
+@media screen and (min-width: 740px){
+  section{
     padding: 10px 100px;
   }
 
@@ -240,5 +240,4 @@ div, .select{
   #imgElement img{
     width: 100%;
 }
-
 }

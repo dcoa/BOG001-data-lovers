@@ -1,6 +1,6 @@
 /*import fetch from './data.js';*/
 
-//import   data from './data/rickandmorty/rickandmorty.json'
+//import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
 
@@ -82,7 +82,7 @@ function loadModal(event) {
    } else if (character.status === "Dead") {
      statusElement.style.color = "#6E1F06";
    } else {
-     statusElement.style.color = "#000000";
+     statusElement.style.color = "#000000"
    }
 
    let genderElement = document.createElement("p");
@@ -91,17 +91,17 @@ function loadModal(event) {
 
    let speciesElement = document.createElement("p");
    speciesElement.innerHTML = "Specie: " + character.species;
-   
    let nameOrigin = document.createElement("p");
    nameOrigin.innerHTML = "Origin Planet: " + character.origin.name;
-   
+
+   statusgender.appendChild(statusElement);
+   statusgender.appendChild(genderElement);
    img.appendChild(imgElement);
    contentElement.appendChild(nameElement);
    contentElement.appendChild(statusgender);
-   statusgender.appendChild(statusElement);
-   statusgender.appendChild(genderElement);
    contentElement.appendChild(speciesElement);
    contentElement.appendChild(nameOrigin);
+
 }
 
 function closeModal() {
