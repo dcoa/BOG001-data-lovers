@@ -1,6 +1,6 @@
-/*import { example } from './data.js';*/ 
+/*import fetch from './data.js';*/
 
-//import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
+//import   data from './data/rickandmorty/rickandmorty.json'
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
 
