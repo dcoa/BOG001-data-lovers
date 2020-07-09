@@ -1,14 +1,13 @@
-import { filterEpisode } from './data.js';
+import allfunction from './data.js';
 //imort  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
-const btnSeeMore = document.getElementById("seeMore");
-btnSeeMore.addEventListener("click", more)
+/*const btnSeeMore = document.getElementById("seeMore");
+btnSeeMore.addEventListener("click", more)*/
 
-const evento = document.getElementById("closeModal");
+/*const evento = document.getElementById("closeModal");
 evento.addEventListener("click", closeModal);
 
 var personajesObj = {};
 var everyone = [];
-
 cargarPersonajes();
 
 function more() {
@@ -19,12 +18,11 @@ function more() {
    cargarPersonajes(personajesObj.next);
 }
 
-function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
+function cargarPersonajes(url = "https://raw.githubusercontent.com/dcoa/BOG001-data-lovers/master/src/data/rickandmorty/rickandmorty.json") {
    fetch(url)
       .then(res => res.json())
       .then(res => {
          personajesObj = res.info;
-
          everyone = everyone.concat(res.results);
          res.results.forEach(element => {
             personajes.pintar(element);
@@ -54,7 +52,7 @@ const personajes = {
       optionsHtml.appendChild(divElement);
    },
 };
-console.log(filterEpisode(everyone));
+
 
 function loadModal(event) {
 
@@ -109,4 +107,29 @@ function loadModal(event) {
 function closeModal() {
    var modal = document.getElementById("myModal");
    modal.style.display = "none";
+}
+
+const btnfilter = document.getElementById("filter");
+let c = btnfilter.value;
+console.log(c);
+
+let allepisode;
+let apiepisode;
+fetch("https://rickandmortyapi.com/api/episode/")
+  .then(res => res.json())
+  .then(res => {
+    apiepisode = res.info.next;
+    allepisode = res.results;
+    console.log(allepisode);
+    allepisode.forEach(element => {
+      mostrarEpisodios(element);
+    });
+  });
+
+
+function mostrarEpisodios (allepisode) {
+  let episode = document.createElement("option");
+   episode.innerHTML = allepisode.episode + " : "+ allepisode.name;
+   episode.value = allepisode.id;
+   btnfilter.appendChild(episode);
 }

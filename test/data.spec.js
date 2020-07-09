@@ -1,6 +1,7 @@
-import { get } from '../src/data.js';
+import  allfunction from '../src/data.js';
+import data from "../src/data/rickandmorty/rickandmorty.js"
 
-const SERVER = 'https://rickandmortyapi.com/api/character/';
+/*const SERVER = 'https://rickandmortyapi.com/api/character/';
 
 describe('API REST', () => {
   it('GET /character debe devolver todos los personajes', async () => {
@@ -21,20 +22,29 @@ describe('API REST', () => {
     }
 
   });
-});
+});*/
 
-/*describe('example', () => {
+describe('allfunction.filterepisode', () => {
   it('is a function', () => {
-    expect(typeof example).toBe('function');
+    expect(typeof allfunction.filterepisode).toBe('function');
   });
 
-  it('returns `example`', () => {
-    expect(example()).toBe('example');
+  it('deberia retornar un array para el episodio 30', () => {
+    expect(typeof allfunction.filterepisode(data.results, 30)).toBe('object');
   });
+
+  it('deberia retornar Blim Blam para el episodio 14', () => {
+    expect(allfunction.filterepisode(data.results, 14)[6].name).toBe('Blim Blam');
+  });
+
+  it('deberia retornar 13 perdonajes para el episodio 4', () => {
+    expect(allfunction.filterepisode(data.results, 4)).toHaveLength(13);
+  });
+
 });
 
 
-describe('anotherExample', () => {
+/*describe('anotherExample', () => {
   it('is a function', () => {
     expect(typeof anotherExample).toBe('function');
   });

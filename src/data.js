@@ -6,8 +6,18 @@ export const get = async (url) => {
    return personajes;
 };*/
 
-export const filterEpisode = (data) => {
-     return data.filter((element)=>{
-      elemenet.episode;
-    })
-};
+const allfunction = {
+filterepisode : (data, filterby) => {
+ let filtered = [];
+   data.filter(data => {
+    data.episode.forEach(ep => {
+      let num = parseInt(ep.substring(40));
+      if(num  === filterby){
+        filtered.push(data);
+    }
+  });
+})
+  return filtered;
+},
+}
+export default allfunction
