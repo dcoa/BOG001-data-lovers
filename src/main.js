@@ -20,7 +20,7 @@ function more() {
    cargarPersonajes(personajesObj.next);
 }
 
-function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
+function cargarPersonajes(url = "https://raw.githubusercontent.com/DaniRami/BOG001-data-lovers/master/src/data/rickandmorty/rickandmorty.json") {
    fetch(url)
       .then(res => res.json())
       .then(res => {
