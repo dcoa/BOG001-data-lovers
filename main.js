@@ -114,7 +114,7 @@ fetch("data/rickandmorty/episode.json")
   .then(res => {
 
     allepisode = res.results;
-    console.log(allepisode);
+
     allepisode.forEach(element => {
       mostrarEpisodios(element);
     });
@@ -132,7 +132,7 @@ function showfilterdata(e){
   const epvalue = e.target.value;
   let ch = allfunction.filterepisode(everyone, epvalue);
    document.getElementById("seeMore").style.display = "none";
-   document.getElementById("container").innerHTML = "";
+   document.getElementById("container").innerHTML = " ";
 
   ch.forEach(element => {
      personajes.pintar(element);})
