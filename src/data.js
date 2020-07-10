@@ -1,9 +1,6 @@
-import fetch from "node-fetch";
+const filertEpisode =  (episode, listEpisode) => {
+  let filtered = listEpisode.find(epi => epi.id == episode)
+  return filtered;
+}
 
-export const get = async (url = 'https://rickandmortyapi.com/api/character/') => {
-  let data = await fetch(url)
-  let personajes = await data.json()
-  return personajes;
-};
-
- 
+export default filertEpisode;

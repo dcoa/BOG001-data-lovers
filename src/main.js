@@ -1,4 +1,6 @@
-/*import fetch from './data.js';*/
+import filertEpisode from './data.js';
+
+/*const { default: fetch } = require("node-fetch");*/
 
 //import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 const btnSeeMore = document.getElementById("seeMore");
@@ -9,42 +11,47 @@ evento.addEventListener("click", closeModal);
 
 var personajesObj = {};
 var everyone = [];
-
 cargarPersonajes();
 
-function more() {
+async function get(url){
+   try {
+     let data = await fetch(url)
+     return await data.json()
+   } catch (error) {
+     console.log(`error con el servicio ${url}`)
+   }
+ }
+ 
+
+async function more() {
    if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
       document.getElementById("seeMore").disabled = true;
    }
-
-   cargarPersonajes(personajesObj.next);
+   await cargarPersonajes(personajesObj.next);
 }
 
-function cargarPersonajes(url = "https://raw.githubusercontent.com/DaniRami/BOG001-data-lovers/master/src/data/rickandmorty/rickandmorty.json") {
-   fetch(url)
-      .then(res => res.json())
-      .then(res => {
-         personajesObj = res.info;
-         everyone = everyone.concat(res.results)
-         res.results.forEach(element => {
-            personajes.pintar(element);
-         });
-      });
+async function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
+   let data = await get(url)
+   personajesObj = data.info;
+   everyone = everyone.concat(data.results);
+   data.results.forEach(element => {
+      personajes.pintar(element);
+   })
 }
 
 const personajes = {
-   pintar: (personajesItem) => {
+   pintar: (everyone) => {
 
       let divElement = document.createElement("div");
 
       let imgElement = document.createElement("img")
-      imgElement.src = personajesItem.image;
-      imgElement.id = personajesItem.id;
+      imgElement.src = everyone.image;
+      imgElement.id = everyone.id;
       imgElement.className = "select";
       imgElement.addEventListener("click", loadModal);
 
       let nameElement = document.createElement("h3");
-      nameElement.innerHTML = personajesItem.name;
+      nameElement.innerHTML = everyone.name;
       nameElement.className = "selectname";
 
       divElement.appendChild(imgElement);
@@ -54,6 +61,7 @@ const personajes = {
       optionsHtml.appendChild(divElement);
    },
 };
+
 
 function loadModal(event) {
    let id = event.target.id;
@@ -67,7 +75,7 @@ function loadModal(event) {
    img.innerHTML = "";
    contentElement.innerHTML = "";
 
-   let imgElement = document.createElement("img")
+   let imgElement = document.createElement("img");
    imgElement.src = character.image;
 
    let nameElement = document.createElement("h3");
@@ -78,11 +86,11 @@ function loadModal(event) {
    let statusElement = document.createElement("p");
    statusElement.innerHTML = "Status: " + character.status;
    if (character.status === "Alive") {
-     statusElement.style.color = "#20856B";
+      statusElement.style.color = "#20856B";
    } else if (character.status === "Dead") {
-     statusElement.style.color = "#6E1F06";
+      statusElement.style.color = "#6E1F06";
    } else {
-     statusElement.style.color = "#000000"
+      statusElement.style.color = "#000000"
    }
 
    let genderElement = document.createElement("p");
@@ -108,3 +116,53 @@ function closeModal() {
    var modal = document.getElementById("myModal");
    modal.style.display = "none";
 }
+
+const btnfilter = document.getElementById("filter");
+btnfilter.addEventListener("change",loadFilter)
+
+let charactersByEpisode = []
+
+async function loadFilter(event){
+   charactersByEpisode = []
+   let optionsHtml = document.getElementById("container");
+   optionsHtml.innerHTML = "" 
+   document.getElementById("seeMore").style.display = "none";  
+   debugger
+   let personajesUrls = filertEpisode(event.target.value,allepisodes)
+   let characters = personajesUrls.characters
+   let count = 0
+   while (count < characters.length) {
+      let data = await get(characters[count])
+      personajes.pintar(data);
+      count++
+   }
+
+}
+
+
+let allepisodes = [];
+async function obtenerCapitulos() {
+   let url = "https://rickandmortyapi.com/api/episode/"
+   while (url != null) {
+      let data = await get(url)
+      url = data.info.next
+      allepisodes = allepisodes.concat(data.results)
+   }
+   allepisodes.forEach(element => {
+      mostrarEpisodios(element);
+   });
+}
+
+
+function mostrarEpisodios(allepisode) {
+   let episode = document.createElement("option");
+   episode.innerHTML = allepisode.episode + " : " + allepisode.name;
+   episode.value = allepisode.id;
+   btnfilter.appendChild(episode);
+}
+
+obtenerCapitulos();
+
+
+
+ 
