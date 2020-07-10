@@ -55,24 +55,24 @@ footer{
   justify-content: center;
 }
 
-#reddit:after{
+#reddit::after{
   padding: 10px;
   content: url('https://api.iconify.design/simple-icons:reddit.svg?color=%23C5D729&height=24');
 
 }
 
-#facebook:after{
+#facebook::after{
   padding: 10px;
   content: url('https://api.iconify.design/simple-icons:facebook.svg?color=%23C5D729&height=24');
 
 }
 
-#pinterest:after{
+#pinterest::after{
   padding: 10px;
   content: url('https://api.iconify.design/simple-icons:pinterest.svg?color=%23C5D729&height=24');
 
 }
-#website:after{
+#website::after{
   padding: 10px;
   content: url('https://api.iconify.design/whh:website.svg?color=%23C5D729&width=24&height=24');
 }
