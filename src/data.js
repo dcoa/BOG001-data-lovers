@@ -11,7 +11,7 @@ filterepisode : (data, filterby) => {
  let filtered = [];
    data.filter(data => {
     data.episode.forEach(ep => {
-      let num = parseInt(ep.substring(40));
+      let num = ep.substring(40);
       if(num  === filterby){
         filtered.push(data);
     }

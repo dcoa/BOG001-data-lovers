@@ -29,16 +29,16 @@ describe('allfunction.filterepisode', () => {
     expect(typeof allfunction.filterepisode).toBe('function');
   });
 
-  it('deberia retornar un array para el episodio 30', () => {
-    expect(typeof allfunction.filterepisode(data.results, 30)).toBe('object');
+  it('deberia retornar un object para el episodio 30', () => {
+    expect(typeof allfunction.filterepisode(data.results, "30")).toBe('object');
   });
 
   it('deberia retornar Blim Blam para el episodio 14', () => {
-    expect(allfunction.filterepisode(data.results, 14)[6].name).toBe('Blim Blam');
+    expect(allfunction.filterepisode(data.results, "14")[6].name).toBe('Blim Blam');
   });
 
   it('deberia retornar 13 perdonajes para el episodio 4', () => {
-    expect(allfunction.filterepisode(data.results, 4)).toHaveLength(13);
+    expect(allfunction.filterepisode(data.results, "4")).toHaveLength(13);
   });
 
 });

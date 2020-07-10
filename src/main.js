@@ -1,9 +1,9 @@
 import allfunction from './data.js';
-//imort  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
-/*const btnSeeMore = document.getElementById("seeMore");
-btnSeeMore.addEventListener("click", more)*/
 
-/*const evento = document.getElementById("closeModal");
+const btnSeeMore = document.getElementById("seeMore");
+btnSeeMore.addEventListener("click", more)
+
+const evento = document.getElementById("closeModal");
 evento.addEventListener("click", closeModal);
 
 var personajesObj = {};
@@ -11,11 +11,6 @@ var everyone = [];
 cargarPersonajes();
 
 function more() {
-   if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
-      document.getElementById("seeMore").disabled = true;
-   }
-
-   cargarPersonajes(personajesObj.next);
 }
 
 function cargarPersonajes(url = "https://raw.githubusercontent.com/dcoa/BOG001-data-lovers/master/src/data/rickandmorty/rickandmorty.json") {
@@ -109,16 +104,15 @@ function closeModal() {
    modal.style.display = "none";
 }
 
-const btnfilter = document.getElementById("filter");
-let c = btnfilter.value;
-console.log(c);
+const episode = document.getElementById("filter");
+episode.addEventListener("change", showfilterdata);
 
 let allepisode;
-let apiepisode;
-fetch("https://rickandmortyapi.com/api/episode/")
+
+fetch("data/rickandmorty/episode.json")
   .then(res => res.json())
   .then(res => {
-    apiepisode = res.info.next;
+
     allepisode = res.results;
     console.log(allepisode);
     allepisode.forEach(element => {
@@ -128,8 +122,18 @@ fetch("https://rickandmortyapi.com/api/episode/")
 
 
 function mostrarEpisodios (allepisode) {
-  let episode = document.createElement("option");
-   episode.innerHTML = allepisode.episode + " : "+ allepisode.name;
-   episode.value = allepisode.id;
-   btnfilter.appendChild(episode);
+  let option = document.createElement("option");
+   option.innerHTML = allepisode.episode + " : "+ allepisode.name;
+   option.value = allepisode.id;
+   episode.appendChild(option);
+}
+
+function showfilterdata(e){
+  const epvalue = e.target.value;
+  let ch = allfunction.filterepisode(everyone, epvalue);
+   document.getElementById("seeMore").style.display = "none";
+   document.getElementById("container").innerHTML = "";
+
+  ch.forEach(element => {
+     personajes.pintar(element);})
 }
