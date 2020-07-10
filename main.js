@@ -1,6 +1,5 @@
-/*import { example } from './data.js';*/
+import allfunction from './data.js';
 
-//import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
 
@@ -9,23 +8,17 @@ evento.addEventListener("click", closeModal);
 
 var personajesObj = {};
 var everyone = [];
-
 cargarPersonajes();
 
 function more() {
-   if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
-      document.getElementById("seeMore").disabled = true;
-   }
-
-   cargarPersonajes(personajesObj.next);
 }
 
-function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
+function cargarPersonajes(url = "https://raw.githubusercontent.com/dcoa/BOG001-data-lovers/master/src/data/rickandmorty/rickandmorty.json") {
    fetch(url)
       .then(res => res.json())
       .then(res => {
          personajesObj = res.info;
-         everyone = everyone.concat(res.results)
+         everyone = everyone.concat(res.results);
          res.results.forEach(element => {
             personajes.pintar(element);
          });
@@ -33,18 +26,18 @@ function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
 }
 
 const personajes = {
-   pintar: (personajesItem) => {
+   pintar: (everyone) => {
 
       let divElement = document.createElement("div");
 
       let imgElement = document.createElement("img")
-      imgElement.src = personajesItem.image;
-      imgElement.id = personajesItem.id;
+      imgElement.src = everyone.image;
+      imgElement.id = everyone.id;
       imgElement.className = "select";
       imgElement.addEventListener("click", loadModal);
 
       let nameElement = document.createElement("h3");
-      nameElement.innerHTML = personajesItem.name;
+      nameElement.innerHTML = everyone.name;
       nameElement.className = "selectname";
 
       divElement.appendChild(imgElement);
@@ -54,6 +47,7 @@ const personajes = {
       optionsHtml.appendChild(divElement);
    },
 };
+
 
 function loadModal(event) {
 
@@ -108,4 +102,38 @@ function loadModal(event) {
 function closeModal() {
    var modal = document.getElementById("myModal");
    modal.style.display = "none";
+}
+
+const episode = document.getElementById("filter");
+episode.addEventListener("change", showfilterdata);
+
+let allepisode;
+
+fetch("data/rickandmorty/episode.json")
+  .then(res => res.json())
+  .then(res => {
+
+    allepisode = res.results;
+    console.log(allepisode);
+    allepisode.forEach(element => {
+      mostrarEpisodios(element);
+    });
+  });
+
+
+function mostrarEpisodios (allepisode) {
+  let option = document.createElement("option");
+   option.innerHTML = allepisode.episode + " : "+ allepisode.name;
+   option.value = allepisode.id;
+   episode.appendChild(option);
+}
+
+function showfilterdata(e){
+  const epvalue = e.target.value;
+  let ch = allfunction.filterepisode(everyone, epvalue);
+   document.getElementById("seeMore").style.display = "none";
+   document.getElementById("container").innerHTML = "";
+
+  ch.forEach(element => {
+     personajes.pintar(element);})
 }

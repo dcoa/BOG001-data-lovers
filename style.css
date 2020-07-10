@@ -92,6 +92,7 @@ section{
 }
 
 .btn{
+  max-width: 200px;
   margin: 10px;
   padding: 5px;
   background: #79E8F6;
@@ -111,7 +112,7 @@ section{
 }
 
 /* Characters*/
-#container{
+.container{
   display:grid;
   grid-template-columns:1fr 1fr;
   grid-gap: 15px;
@@ -218,7 +219,7 @@ div, .select{
     padding: 10px 100px;
   }
 
-  #container{
+  .container {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
 
