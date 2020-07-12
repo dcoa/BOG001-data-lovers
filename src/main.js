@@ -1,4 +1,4 @@
-import filertEpisode from './data.js';
+import data  from './data.js';
 
 /*const { default: fetch } = require("node-fetch");*/
 
@@ -13,15 +13,15 @@ var personajesObj = {};
 var everyone = [];
 cargarPersonajes();
 
-async function get(url){
+async function get(url) {
    try {
-     let data = await fetch(url)
-     return await data.json()
+      let data = await fetch(url)
+      return await data.json()
    } catch (error) {
-     console.log(`error con el servicio ${url}`)
+      console.log(`error con el servicio ${url}`)
    }
- }
- 
+}
+
 
 async function more() {
    if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
@@ -31,11 +31,14 @@ async function more() {
 }
 
 async function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
-   let data = await get(url)
-   personajesObj = data.info;
-   everyone = everyone.concat(data.results);
-   data.results.forEach(element => {
+   let dataResult = await get(url)
+   personajesObj = dataResult.info;
+   everyone = everyone.concat(dataResult.results);
+   debugger
+   everyone = data.sortByDimension(everyone, "species", "ascendente") 
+   everyone.forEach(element => {
       personajes.pintar(element);
+
    })
 }
 
@@ -118,21 +121,23 @@ function closeModal() {
 }
 
 const btnfilter = document.getElementById("filter");
-btnfilter.addEventListener("change",loadFilter)
+btnfilter.addEventListener("change", loadFilter)
 
 let charactersByEpisode = []
 
-async function loadFilter(event){
+async function loadFilter(event) {
    charactersByEpisode = []
    let optionsHtml = document.getElementById("container");
-   optionsHtml.innerHTML = "" 
-   document.getElementById("seeMore").style.display = "none";  
+   optionsHtml.innerHTML = ""
+   document.getElementById("seeMore").style.display = "none";
    debugger
-   let personajesUrls = filertEpisode(event.target.value,allepisodes)
+   let personajesUrls = data.filertEpisode(event.target.value, allepisodes)
    let characters = personajesUrls.characters
    let count = 0
+   everyone = []
    while (count < characters.length) {
       let data = await get(characters[count])
+      everyone.push(data)
       personajes.pintar(data);
       count++
    }
@@ -163,6 +168,18 @@ function mostrarEpisodios(allepisode) {
 
 obtenerCapitulos();
 
+const btnsort = document.getElementById("Sort");
+btnsort.addEventListener("change",orderByDimention);
 
+async function orderByDimention(event) {
+   everyone = data.sortByDimension(everyone,"species", event.target.value)
+   let optionsHtml = document.getElementById("container");
+   optionsHtml.innerHTML = ""
+   debugger
+   everyone.forEach(element => {
+   personajes.pintar(element);  
+   
+    
+})
+}
 
- 

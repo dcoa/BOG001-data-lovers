@@ -19,9 +19,13 @@
     <p>A continuación te presentamos los personajes de Rick and Morty, puedes dar click sobre el personaje para objeter más información. Sientete libre de explorarolos, puedes filtrarlos y ordenarlos.</p>
     <div class="botton">
       <select type="button" class="btn" id="filter">
-        <option value="0">Filtrar por episodio</option>
+        <option  value="0">Filtrar por episodio</option>
       </select>
-       <button type="button" class="btn">Ordenar por ubicación</button>
+       <select type="button" class="btn" id="Sort"> 
+         <option disabled> Ordenar por specie </option>
+         <option selected value="ascendente">Ascendente</option>
+         <option  value="descendente">Descendente</option>
+        </select>
     </div>
     <div id="container">
   </div>
