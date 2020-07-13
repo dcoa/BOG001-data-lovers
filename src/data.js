@@ -9,11 +9,11 @@ export const get = async (url) => {
 const allfunction = {
 filterepisode : (data, filterby) => {
  let filtered = [];
-   data.filter(data => {
-    data.episode.forEach(ep => {
+   data.filter(character => {
+    character.episode.forEach(ep => {
       let num = ep.substring(40);
       if(num  === filterby){
-        filtered.push(data);
+        filtered.push(character);
     }
   });
 })
