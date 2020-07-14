@@ -138,6 +138,7 @@ btnfilter.addEventListener("change", loadFilter)
 function loadFilter(event) {
    let optionsHtml = document.getElementById("container");
    optionsHtml.innerHTML = ""
+   document.getElementById("seeMore").style.display = "none";
    let filterChapters = data.filterCharacters(event.target.value, everyone)
    everyoneTemp = filterChapters
    filterChapters.forEach((character) => {
