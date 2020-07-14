@@ -1,19 +1,19 @@
-import data  from './data.js';
+import data from './data.js';
 
-/*const { default: fetch } = require("node-fetch");*/
 
-//import  {cargarJson} datafrom './data/rickandmorty/rickandmorty.json'
 const btnSeeMore = document.getElementById("seeMore");
 btnSeeMore.addEventListener("click", more)
 
 const evento = document.getElementById("closeModal");
 evento.addEventListener("click", closeModal);
 
-var personajesObj = {};
 var everyone = [];
+var currentpage = 1;
+var everyoneTemp = []
 cargarPersonajes();
 
-async function get(url) {
+
+async function get(url) {  
    try {
       let data = await fetch(url)
       return await data.json()
@@ -23,29 +23,40 @@ async function get(url) {
 }
 
 
-async function more() {
-   if (personajesObj.next == "https://rickandmortyapi.com/api/character/?page=30") {
-      document.getElementById("seeMore").disabled = true;
-   }
-   await cargarPersonajes(personajesObj.next);
+function callPintar(){
+   let everyonePage = everyone.filter(chara => chara.id >= currentpage && chara.id <= currentpage+20)
+   currentpage = currentpage+20 
+   everyonePage = data.sortByDimension(everyonePage, "name", "ascendente")
+   everyoneTemp = everyonePage
+   everyonePage.forEach(element => {
+      personajes.pintar(element);
+   })
 }
 
-async function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
-   let dataResult = await get(url)
-   personajesObj = dataResult.info;
-   everyone = everyone.concat(dataResult.results);
-   debugger
-   everyone = data.sortByDimension(everyone, "species", "ascendente") 
-   everyone.forEach(element => {
-      personajes.pintar(element);
+async function more() {
+   callPintar()
+   if (currentpage >= everyone.length) {
+      document.getElementById("seeMore").disabled = true;
+   }
+}
 
-   })
+
+
+async function cargarPersonajes(url ="https://rickandmortyapi.com/api/character/") {   
+   let dataResult 
+   while (url != null) {
+      dataResult = await get(url)
+      everyone = everyone.concat(dataResult.results);    
+      url = dataResult.info.next;
+   }
+   callPintar()
 }
 
 const personajes = {
    pintar: (everyone) => {
 
       let divElement = document.createElement("div");
+
 
       let imgElement = document.createElement("img")
       imgElement.src = everyone.image;
@@ -67,6 +78,7 @@ const personajes = {
 
 
 function loadModal(event) {
+   debugger
    let id = event.target.id;
    let character = everyone.find(ch => ch.id == Number(id));
 
@@ -123,30 +135,23 @@ function closeModal() {
 const btnfilter = document.getElementById("filter");
 btnfilter.addEventListener("change", loadFilter)
 
-let charactersByEpisode = []
-
 async function loadFilter(event) {
-   charactersByEpisode = []
+   debugger
    let optionsHtml = document.getElementById("container");
    optionsHtml.innerHTML = ""
-   document.getElementById("seeMore").style.display = "none";
-   debugger
-   let personajesUrls = data.filertEpisode(event.target.value, allepisodes)
-   let characters = personajesUrls.characters
-   let count = 0
-   everyone = []
-   while (count < characters.length) {
-      let data = await get(characters[count])
-      everyone.push(data)
-      personajes.pintar(data);
-      count++
-   }
-
+   let filterChapters = data.filterCharacters(event.target.value,everyone)
+   everyoneTemp = filterChapters
+   filterChapters.forEach((character) =>
+   {
+      personajes.pintar(character)
+   })
 }
 
 
 let allepisodes = [];
+
 async function obtenerCapitulos() {
+
    let url = "https://rickandmortyapi.com/api/episode/"
    while (url != null) {
       let data = await get(url)
@@ -160,26 +165,23 @@ async function obtenerCapitulos() {
 
 
 function mostrarEpisodios(allepisode) {
+   debugger
    let episode = document.createElement("option");
    episode.innerHTML = allepisode.episode + " : " + allepisode.name;
-   episode.value = allepisode.id;
+   episode.value = allepisode.url;
    btnfilter.appendChild(episode);
 }
 
 obtenerCapitulos();
 
 const btnsort = document.getElementById("Sort");
-btnsort.addEventListener("change",orderByDimention);
+btnsort.addEventListener("change", orderByDimention);
 
 async function orderByDimention(event) {
-   everyone = data.sortByDimension(everyone,"species", event.target.value)
+   let tempdata = data.sortByDimension(everyoneTemp, "name", event.target.value)
    let optionsHtml = document.getElementById("container");
    optionsHtml.innerHTML = ""
-   debugger
-   everyone.forEach(element => {
-   personajes.pintar(element);  
-   
-    
-})
+   tempdata.forEach(element => {
+      personajes.pintar(element);
+   })
 }
-

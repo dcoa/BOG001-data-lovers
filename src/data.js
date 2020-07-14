@@ -1,19 +1,21 @@
 const data = {
+  
   sortByDimension: (data, sortBy, sortOrder) => {
-    debugger
-    if(sortOrder === 'ascendente'){
-     return data.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1);
+  let dataOrganizada = data.sort((a, b) => a.location.name > b.location.name ? 1 : -1);
+  if(sortOrder === 'descendente'){
+    dataOrganizada = dataOrganizada.reverse()       
     }
-    if (sortOrder === 'descendente') {
-      return data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
-    }
+    return dataOrganizada;
+    
   },
-  filertEpisode: (episode, listEpisode) => {
-    let filtered = listEpisode.find(epi => epi.id == episode)
+  
+  filterCharacters: (character, listCharacters) => {
+    let filtered = listCharacters.filter(epi => epi.episode.some(e => e == character))
     return filtered;
   }
 }
 export default data;
+  
 
 
 
@@ -21,4 +23,3 @@ export default data;
 
 
 
-/*computeStats(data)*/
