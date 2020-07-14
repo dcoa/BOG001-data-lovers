@@ -13,7 +13,7 @@ var everyoneTemp = []
 cargarPersonajes();
 
 
-async function get(url) {  
+async function get(url) {
    try {
       let data = await fetch(url)
       return await data.json()
@@ -23,9 +23,9 @@ async function get(url) {
 }
 
 
-function callPintar(){
-   let everyonePage = everyone.filter(chara => chara.id >= currentpage && chara.id <= currentpage+20)
-   currentpage = currentpage+20 
+function callPintar() {
+   let everyonePage = everyone.filter(chara => chara.id >= currentpage && chara.id <= currentpage + 20)
+   currentpage = currentpage + 20
    everyonePage = data.sortByDimension(everyonePage, "name", "ascendente")
    everyoneTemp = everyonePage
    everyonePage.forEach(element => {
@@ -42,11 +42,11 @@ async function more() {
 
 
 
-async function cargarPersonajes(url ="https://rickandmortyapi.com/api/character/") {   
-   let dataResult 
+async function cargarPersonajes(url = "https://rickandmortyapi.com/api/character/") {
+   let dataResult
    while (url != null) {
       dataResult = await get(url)
-      everyone = everyone.concat(dataResult.results);    
+      everyone = everyone.concat(dataResult.results);
       url = dataResult.info.next;
    }
    callPintar()
@@ -135,14 +135,12 @@ function closeModal() {
 const btnfilter = document.getElementById("filter");
 btnfilter.addEventListener("change", loadFilter)
 
-async function loadFilter(event) {
-   debugger
+function loadFilter(event) {
    let optionsHtml = document.getElementById("container");
    optionsHtml.innerHTML = ""
-   let filterChapters = data.filterCharacters(event.target.value,everyone)
+   let filterChapters = data.filterCharacters(event.target.value, everyone)
    everyoneTemp = filterChapters
-   filterChapters.forEach((character) =>
-   {
+   filterChapters.forEach((character) => {
       personajes.pintar(character)
    })
 }
@@ -151,7 +149,6 @@ async function loadFilter(event) {
 let allepisodes = [];
 
 async function obtenerCapitulos() {
-
    let url = "https://rickandmortyapi.com/api/episode/"
    while (url != null) {
       let data = await get(url)
@@ -177,7 +174,7 @@ obtenerCapitulos();
 const btnsort = document.getElementById("Sort");
 btnsort.addEventListener("change", orderByDimention);
 
-async function orderByDimention(event) {
+function orderByDimention(event) {
    let tempdata = data.sortByDimension(everyoneTemp, "name", event.target.value)
    let optionsHtml = document.getElementById("container");
    optionsHtml.innerHTML = ""
