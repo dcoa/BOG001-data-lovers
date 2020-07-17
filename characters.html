@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>DUB DUB DATA</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
 <body>
@@ -15,16 +16,20 @@
       <a href="index">Inicio</a>
   </header>
 <!-- Personajes de la serie-->
+<main>
   <section>
     <p>A continuación te presentamos los personajes de Rick and Morty, puedes dar click sobre el personaje para objeter más información. Sientete libre de explorarolos, puedes filtrarlos y ordenarlos.</p>
     <div class="botton">
       <select type="button" class="btn" id="filter">
-        <option value="0">Filtrar por episodio</option>
+        <option  value="0">Filtrar por episodio</option>
       </select>
-
-      <button type="button" class="btn">Ordenar por ubicación</button>
+       <select type="button" class="btn" id="Sort">
+         <option value="0"> Ordenado alfabético </option>
+         <option  value="Ascendente">Ascendente</option>
+         <option  value="Descendente">Descendente</option>
+        </select>
     </div>
-    <div class="container" id="container">
+    <div id="container">
   </div>
   </section>
 <!-- Tarjeta con la información del personaje seleccionado-->
@@ -42,7 +47,13 @@
 </section>
   <section>
       <button id="seeMore">Ver más</button>
+      <button type="button" id="statbtn">Ver estadisticas</button>
   </section>
+  <section class ="statistics">
+    <p>Aquí podrás encontrar algunas gráficas que te permiten entender datos de la serie como los lugares más recurrentes en los que se desarrolla de acuerdo a la ubicación actual de los personajes o si quieres saber cuantos personajes se encuentran como Gato de Schrödinger a lo largo de la trama.</p>
+    <canvas id="myChart"></canvas>
+  </section>
+  </main>
   <footer>
  <p>Serie creada por Justin Roiland y Dan Harnoo, 2013</p>
  <p>&copy; Diana Olarte & Daniela Ramirez, 2020</p>
