@@ -14,20 +14,19 @@ const data = {
     return filtered;
   },
 
-  averageLocations: (data, count)=>{
+  averageLocations: (data, totalCharacters)=>{
   let locations = {};
+  let sites ={ "Others": 0,};
   data.forEach(character =>{
-    if(character.location.name in locations){
-      locations[character.location.name] += 1;
-    }else{
-      locations[character.location.name] = 1;
-    }
+    (character.location.name in locations)?locations[character.location.name] += 1 :locations[character.location.name] = 1;
   })
   for(let knownlocation in locations){
-   let average = ((locations[knownlocation] /count)*100).toFixed(2);
-    locations[knownlocation] = average;
+   let average = ((locations[knownlocation] /totalCharacters)*100);
+    (average < 2)? sites["Others"] += average : sites[knownlocation]= average.toFixed(2);
   }
- return locations;
+  sites.Others = sites["Others"].toFixed(2);
+
+ return sites;
 }
 }
 export default data;

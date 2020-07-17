@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>DUB DUB DATA</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
 <body>
@@ -46,6 +47,11 @@
 </section>
   <section>
       <button id="seeMore">Ver más</button>
+      <button type="button" id="statbtn">Ver estadisticas</button>
+  </section>
+  <section class ="statistics">
+    <p>Aquí podrás encontrar algunas gráficas que te permiten entender datos de la serie como los lugares más recurrentes en los que se desarrolla de acuerdo a la ubicación actual de los personajes o si quieres saber cuantos personajes se encuentran como Gato de Schrödinger a lo largo de la trama.</p>
+    <canvas id="myChart"></canvas>
   </section>
   </main>
   <footer>
