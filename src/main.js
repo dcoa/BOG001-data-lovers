@@ -134,7 +134,7 @@ function closeModal() {
 
 function loadFilter(event) {
    optionsHtml.innerHTML = "";
-   document.getElementById("seeMore").style.display = "none";
+   btnSeeMore.style.display = "none";
    let filterChapters = data.filterByEpisode(everyone, event.target.value);
    everyoneTemp = filterChapters;
    filterChapters.forEach(character => paint(character));
@@ -168,6 +168,9 @@ function orderByName() {
 }
 
 const statistics = ()=>{
+  document.querySelector('section').style.display = "none";
+  btnSeeMore.style.display = "none";
+  document.querySelector('.statistics').style.display = "block";
   const sites = data.averageLocations(everyone, count);
 
   let allLocations = document.getElementById('myChart').getContext('2d');
@@ -239,3 +242,9 @@ const statistics = ()=>{
 }
 const statbtn = document.getElementById("statbtn");
 statbtn.addEventListener("click", statistics);
+
+const closeStat = document.getElementById("closeStat").addEventListener("click", ()=>{
+  document.querySelector('section').style.display = "block";
+  btnSeeMore.style.display = "block";
+  document.querySelector('.statistics').style.display = "none";
+});
