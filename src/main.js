@@ -170,8 +170,8 @@ function orderByName() {
 const statistics = ()=>{
   const sites = data.averageLocations(everyone, count);
 
-  let alllocations = document.getElementById('myChart').getContext('2d');
-  let chartlocations = new Chart(alllocations, {
+  let allLocations = document.getElementById('myChart').getContext('2d');
+  let chartlocations = new Chart(allLocations, {
       // The type of chart we want to create
       type: 'doughnut',
       // The data for our dataset
@@ -202,6 +202,40 @@ const statistics = ()=>{
       }
   });
 
+  const allStatus = document.getElementById("chart").getContext('2d');
+  let chartStatus = new Chart(allStatus, {
+  // The type of chart we want to create
+  type: 'doughnut',
+
+  // The data for our dataset
+  data: {
+      labels: ["Alive", "unknown", "Dead"],
+      datasets: [{
+          label: 'Estado de los personajes',
+          backgroundColor: ["#2DDB0B", "#F7BC63", "#F76363"],
+          borderWidth: 2,
+          borderColor: '#ffffff',
+          hoverBorderWidth: 4,
+          data: data.averageStatus(everyone),
+      }]
+  },
+
+  // Configuration options go here
+  options: {
+      responsive: true,
+      title: {
+          display: true,
+          text: 'PORCENTAJE DE PERSONAJES DE ACUERDO A SU ESTADO DE VIDA',
+          fontColor: "#FAF7F7",
+          fontFamily: 'Pangolin',
+          fontSize: 20,
+          padding: 10,
+      },
+      legend: {
+        display: false,
+      },
+  }
+});
 }
 const statbtn = document.getElementById("statbtn");
 statbtn.addEventListener("click", statistics);

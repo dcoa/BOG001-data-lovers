@@ -172,5 +172,23 @@ describe('data.averageLocations', () => {
     const planets = ['Others','Testicle Monster Dimension','Abadango'];
     expect(Object.keys(data.averageLocations(rickandmorty.results,rickandmorty.info.count))).toEqual(planets);
   });
+});
 
+describe('data.averageStatus', () => {
+  it('is a function', () => {
+    expect(typeof data.averageStatus).toBe('function');
+  });
+
+  it('deberia retornar un object', () => {
+    expect(typeof data.averageStatus(rickandmorty.results)).toBe('object');
+  });
+
+  it('deberia retornar 33.33 para  unknown', () => {
+    expect(data.averageStatus(rickandmorty.results)[1]).toBe('33.33');
+  });
+
+  it('deberia retornar array con los valores para Alive, unknown y Dead', () => {
+    const status = ['66.67', '33.33', '0.00'];
+    expect(data.averageStatus(rickandmorty.results)).toStrictEqual(status);
+  });
 });
