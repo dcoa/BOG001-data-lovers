@@ -27,6 +27,19 @@ const data = {
   sites.Others = sites["Others"].toFixed(2);
 
  return sites;
+},
+
+averageStatus: (everyone) => {
+  let arrayStatus = ["Alive", "unknown", "Dead"]
+  let result = [];
+  let total = everyone.length
+  arrayStatus.forEach((state) => {
+    let dataResult = everyone.filter(character => character.status == state)
+    let count = dataResult.length
+    result.push(((count / total)* 100).toFixed(2));
+
+  })
+  return result;
 }
 }
 export default data;
