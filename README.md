@@ -43,13 +43,11 @@ En la parte de filtrado por episodios se sugirió realizar una referencia a la t
 
 [Desktop](https://www.figma.com/proto/jSV7y2usCNuLacIDpo6C75/Rick-y-Morty?node-id=111%3A0&scaling=min-zoom)
 
-<img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipodeskcop1.jpg/" width="50%" alt="Prototipo de alta fidelidad desktop"/>
-<img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipodeskcop2.jpg/" width="50%" alt="Prototipo de alta fidelidad desktop"/>
+<img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/protopipodeskcop1.png" width="50%" alt="Prototipo de alta fidelidad desktop"/> <img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipodeskcop2.png/" width="50%" alt="Prototipo de alta fidelidad desktop"/>
 
 [Móvil](https://www.figma.com/proto/jSV7y2usCNuLacIDpo6C75/Rick-y-Morty?node-id=0%3A1&scaling=scale-down)
 
-<img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipomovil1.jpg/" width="50%" alt="Prototipo de alta fidelidad móvil"/>
-<img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipomovil2.jpg/" width="50%" alt="Prototipo de alta fidelidad móvil"/>
+<img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipomovil1.png/" width="25%" alt="Prototipo de alta fidelidad móvil"/> <img src="https://github.com/dcoa/BOG001-data-lovers/blob/master/src/img/prototipomovil2.png/" width="25%" alt="Prototipo de alta fidelidad móvil"/>
 
 ### Herramientas de apoyo
 * [Figma](https://www.figma.com/) - Prototipado
